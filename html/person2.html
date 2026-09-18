@@ -2,9 +2,1169 @@
 <html>
 <head>
     <title>Person 2</title>
+    <link rel="stylesheet" href="../Css/person2.css">
+</head>
+ 
+<body>
+<!-- Hero Section -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="hero-label"><h>PERSONAL FINANCE</h1></p>
+
+        <h1>
+            Find the money
+            <span>you're leaking.</span>
+        </h1>
+
+        <p class="hero-description">
+            Track your subscriptions and monthly expenses,
+            discover what you're actually using, and find
+            where your money is quietly disappearing.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#try-it" class="btn-primary">
+                Try it now
+            </a>
+
+            <a href="#how-it-works" class="btn-secondary">
+                See how it works
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- Hero Right Side -->
+    <div class="hero-card">
+
+        <div class="hero-card-header">
+            <span>MONTHLY OVERVIEW</span>
+            <span>₹</span>
+        </div>
+
+        <div class="hero-amount">
+            ₹2,367
+        </div>
+
+        <p>Total monthly spending</p>
+
+        <div class="hero-waste">
+            <span>Potential waste</span>
+            <strong>₹1,619</strong>
+        </div>
+
+        <div class="hero-bar">
+            <div class="hero-bar-fill"></div>
+        </div>
+
+        <div class="hero-footer">
+            <span>68.4% of spending</span>
+            <span>needs attention</span>
+        </div>
+
+    </div>
+
+</section>
+<!-- How It Works Section -->
+<section class="how-it-works" id="how-it-works">
+
+    <div class="section-heading">
+        <p class="section-label">HOW IT WORKS</p>
+
+        <h2>
+            Three steps to find
+            your money leaks.
+        </h2>
+
+        <p>
+            SpendSense makes it simple to understand
+            where your monthly money is going.
+        </p>
+    </div>
+
+
+    <div class="steps">
+
+        <!-- Step 1 -->
+        <div class="step-card">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>Add your expenses</h3>
+
+            <p>
+                Enter your subscriptions and regular
+                monthly expenses such as Netflix,
+                Spotify, gym memberships, and more.
+            </p>
+
+        </div>
+
+
+        <!-- Step 2 -->
+        <div class="step-card">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>Tell us your usage</h3>
+
+            <p>
+                Select how frequently you actually
+                use each subscription or service.
+            </p>
+
+        </div>
+
+
+        <!-- Step 3 -->
+        <div class="step-card">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>Find the leaks</h3>
+
+            <p>
+                SpendSense calculates your potential
+                waste and highlights expenses that
+                may not be worth the money.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- Features Section -->
+<section class="features" id="features">
+
+    <div class="section-heading">
+        <p class="section-label">FEATURES</p>
+
+        <h2>
+            Know where your money goes.
+        </h2>
+
+        <p>
+            Simple tools to help you understand your
+            monthly spending and identify unnecessary expenses.
+        </p>
+    </div>
+
+
+    <div class="features-grid">
+
+        <!-- Feature 1 -->
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ₹
+            </div>
+
+            <h3>Track Expenses</h3>
+
+            <p>
+                Add your monthly subscriptions and
+                expenses in one place.
+            </p>
+
+        </div>
+
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                %
+            </div>
+
+            <h3>Find Money Leaks</h3>
+
+            <p>
+                Identify expenses that you rarely
+                use and may not be worth the cost.
+            </p>
+
+        </div>
+
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ↗
+            </div>
+
+            <h3>Yearly Impact</h3>
+
+            <p>
+                See how much your unnecessary monthly
+                spending could cost you over a year.
+            </p>
+
+        </div>
+
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ✓
+            </div>
+
+            <h3>Smart Recommendation</h3>
+
+            <p>
+                Get a simple recommendation based on
+                how frequently you use each expense.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- Try It Section -->
+<section class="try-it" id="try-it">
+
+    <div class="section-heading">
+        <p class="section-label">TRY IT RIGHT NOW</p>
+
+        <h2>
+            Find your money leaks.
+        </h2>
+
+        <p>
+            Add your subscriptions and expenses to see
+            where your money is going.
+        </p>
+    </div>
+
+
+    <!-- Expense Form -->
+    <div class="expense-container">
+
+        <div class="expense-form">
+
+            <h3>Add an expense</h3>
+
+            <form id="expenseForm">
+
+                <div class="form-group">
+                    <label for="expenseName">
+                        Expense name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="expenseName"
+                        placeholder="Eg. Spotify"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="expenseAmount">
+                        Monthly amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="expenseAmount"
+                        placeholder="Eg. 119"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="expenseUsage">
+                        How often do you use it?
+                    </label>
+
+                    <select id="expenseUsage">
+
+                        <option value="often">
+                            Often
+                        </option>
+
+                        <option value="sometimes">
+                            Sometimes
+                        </option>
+
+                        <option value="rarely">
+                            Rarely
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <button type="submit" class="add-expense-btn">
+                    + Add Expense
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Summary -->
+        <div class="expense-summary">
+
+            <div class="summary-card">
+                <p>Total monthly spending</p>
+
+                <h3 id="totalAmount">
+                    ₹0
+                </h3>
+            </div>
+
+
+            <div class="summary-card">
+                <p>Potential waste</p>
+
+                <h3 id="wasteAmount">
+                    ₹0
+                </h3>
+            </div>
+
+
+            <div class="summary-card">
+                <p>Yearly waste</p>
+
+                <h3 id="yearlyWaste">
+                    ₹0
+                </h3>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Expense List -->
+    <div class="expense-list-container">
+
+        <div class="expense-list-header">
+
+            <h3>Your expenses</h3>
+
+            <select id="sortExpenses">
+
+                <option value="recent">
+                    Recently added
+                </option>
+
+                <option value="highest">
+                    Highest amount<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SpendSense - Personal Finance</title>
+
+    <link rel="stylesheet" href="../Css/person2.css">
 </head>
 
 <body>
 
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Spend<span>Sense</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#features">Features</a>
+            <a href="#try-it">Try It</a>
+        </nav>
+
+        <a href="#try-it" class="nav-button">
+            Get Started
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                Personal Finance Made Simple
+            </div>
+
+            <p class="hero-label">
+                PERSONAL FINANCE
+            </p>
+
+            <h1>
+                Find the money
+                <span>you're leaking.</span>
+            </h1>
+
+            <p class="hero-description">
+                Track your subscriptions and monthly expenses,
+                discover what you're actually using, and find
+                where your money is quietly disappearing.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#try-it" class="btn-primary">
+                    Try it now →
+                </a>
+
+                <a href="#how-it-works" class="btn-secondary">
+                    See how it works
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Hero Card -->
+
+        <div class="hero-card">
+
+            <div class="hero-card-header">
+                <span>MONTHLY OVERVIEW</span>
+                <span>₹</span>
+            </div>
+
+            <div class="hero-amount">
+                ₹2,367
+            </div>
+
+            <p>
+                Total monthly spending
+            </p>
+
+            <div class="hero-divider"></div>
+
+            <div class="hero-waste">
+
+                <div>
+                    <span>Potential waste</span>
+                    <strong>₹1,619</strong>
+                </div>
+
+                <div class="warning-icon">
+                    !
+                </div>
+
+            </div>
+
+            <div class="hero-bar">
+                <div class="hero-bar-fill"></div>
+            </div>
+
+            <div class="hero-footer">
+                <span>68.4% of spending</span>
+                <span>needs attention</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         STATS SECTION
+    ========================== -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ₹
+            </div>
+
+            <div>
+                <h3>₹2,367</h3>
+                <p>Monthly spending</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon warning">
+                %
+            </div>
+
+            <div>
+                <h3>₹1,619</h3>
+                <p>Potential waste</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                #
+            </div>
+
+            <div>
+                <h3>05</h3>
+                <p>Active expenses</p>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ↗
+            </div>
+
+            <div>
+                <h3>₹19,428</h3>
+                <p>Yearly waste</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section class="how-it-works" id="how-it-works">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                HOW IT WORKS
+            </p>
+
+            <h2>
+                Three steps to find
+                your money leaks.
+            </h2>
+
+            <p>
+                SpendSense makes it simple to understand
+                where your monthly money is going.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step-card">
+
+                <div class="step-top">
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-icon">
+                        +
+                    </div>
+                </div>
+
+                <h3>
+                    Add your expenses
+                </h3>
+
+                <p>
+                    Enter your subscriptions and regular
+                    monthly expenses such as Netflix,
+                    Spotify, gym memberships, and more.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-top">
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-icon">
+                        %
+                    </div>
+                </div>
+
+                <h3>
+                    Tell us your usage
+                </h3>
+
+                <p>
+                    Select how frequently you actually
+                    use each subscription or service.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-top">
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-icon">
+                        !
+                    </div>
+                </div>
+
+                <h3>
+                    Find the leaks
+                </h3>
+
+                <p>
+                    SpendSense calculates your potential
+                    waste and highlights expenses that
+                    may not be worth the money.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="features" id="features">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                FEATURES
+            </p>
+
+            <h2>
+                Know where your money goes.
+            </h2>
+
+            <p>
+                Simple tools to help you understand your
+                monthly spending and identify unnecessary expenses.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ₹
+                </div>
+
+                <h3>
+                    Track Expenses
+                </h3>
+
+                <p>
+                    Add your monthly subscriptions and
+                    expenses in one place.
+                </p>
+
+                <a href="#try-it">
+                    Start tracking →
+                </a>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    %
+                </div>
+
+                <h3>
+                    Find Money Leaks
+                </h3>
+
+                <p>
+                    Identify expenses that you rarely
+                    use and may not be worth the cost.
+                </p>
+
+                <a href="#try-it">
+                    Find leaks →
+                </a>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ↗
+                </div>
+
+                <h3>
+                    Yearly Impact
+                </h3>
+
+                <p>
+                    See how much your unnecessary monthly
+                    spending could cost you over a year.
+                </p>
+
+                <a href="#try-it">
+                    View impact →
+                </a>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ✓
+                </div>
+
+                <h3>
+                    Smart Recommendation
+                </h3>
+
+                <p>
+                    Get a simple recommendation based on
+                    how frequently you use each expense.
+                </p>
+
+                <a href="#try-it">
+                    Check expenses →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRY IT SECTION
+    ========================== -->
+
+    <section class="try-it" id="try-it">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                TRY IT RIGHT NOW
+            </p>
+
+            <h2>
+                Find your money leaks.
+            </h2>
+
+            <p>
+                Add your subscriptions and expenses to see
+                where your money is going.
+            </p>
+
+        </div>
+
+
+        <div class="expense-container">
+
+            <!-- FORM -->
+
+            <div class="expense-form">
+
+                <div class="form-header">
+
+                    <div>
+                        <p class="small-label">
+                            NEW EXPENSE
+                        </p>
+
+                        <h3>
+                            Add an expense
+                        </h3>
+                    </div>
+
+                    <div class="form-icon">
+                        +
+                    </div>
+
+                </div>
+
+
+                <form id="expenseForm">
+
+                    <div class="form-group">
+
+                        <label for="expenseName">
+                            Expense name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expenseName"
+                            placeholder="Eg. Spotify"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="expenseAmount">
+                            Monthly amount
+                        </label>
+
+                        <div class="amount-input">
+
+                            <span>₹</span>
+
+                            <input
+                                type="number"
+                                id="expenseAmount"
+                                placeholder="119"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="expenseUsage">
+                            How often do you use it?
+                        </label>
+
+                        <select id="expenseUsage">
+
+                            <option value="often">
+                                Often
+                            </option>
+
+                            <option value="sometimes">
+                                Sometimes
+                            </option>
+
+                            <option value="rarely">
+                                Rarely
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="add-expense-btn">
+
+                        + Add Expense
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="expense-summary">
+
+                <div class="summary-card">
+
+                    <div>
+                        <p>Total monthly spending</p>
+                        <h3>₹2,367</h3>
+                    </div>
+
+                    <span class="summary-symbol">
+                        ₹
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card waste-card">
+
+                    <div>
+                        <p>Potential waste</p>
+                        <h3>₹1,619</h3>
+                    </div>
+
+                    <span class="summary-symbol">
+                        !
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div>
+                        <p>Yearly waste</p>
+                        <h3>₹19,428</h3>
+                    </div>
+
+                    <span class="summary-symbol">
+                        ↗
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXPENSE LIST -->
+
+        <div class="expense-list-container">
+
+            <div class="expense-list-header">
+
+                <div>
+
+                    <p class="small-label">
+                        YOUR EXPENSES
+                    </p>
+
+                    <h3>
+                        Monthly subscriptions
+                    </h3>
+
+                </div>
+
+                <select id="sortExpenses">
+
+                    <option>
+                        Recently added
+                    </option>
+
+                    <option>
+                        Highest amount
+                    </option>
+
+                    <option>
+                        Leaks first
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="expense-list">
+
+
+                <!-- Spotify -->
+
+                <div class="expense-item">
+
+                    <div class="expense-info">
+
+                        <div class="expense-logo spotify">
+                            S
+                        </div>
+
+                        <div>
+
+                            <h4>
+                                Spotify
+                            </h4>
+
+                            <p>
+                                Music subscription
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="expense-usage">
+                        Rarely
+                    </div>
+
+
+                    <div class="expense-price">
+                        ₹119
+                        <span>/month</span>
+                    </div>
+
+
+                    <div class="expense-status warning-status">
+                        Review
+                    </div>
+
+                </div>
+
+
+                <!-- Netflix -->
+
+                <div class="expense-item">
+
+                    <div class="expense-info">
+
+                        <div class="expense-logo netflix">
+                            N
+                        </div>
+
+                        <div>
+
+                            <h4>
+                                Netflix
+                            </h4>
+
+                            <p>
+                                Entertainment
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="expense-usage">
+                        Often
+                    </div>
+
+
+                    <div class="expense-price">
+                        ₹199
+                        <span>/month</span>
+                    </div>
+
+
+                    <div class="expense-status useful-status">
+                        Useful
+                    </div>
+
+                </div>
+
+
+                <!-- Gym -->
+
+                <div class="expense-item">
+
+                    <div class="expense-info">
+
+                        <div class="expense-logo gym">
+                            G
+                        </div>
+
+                        <div>
+
+                            <h4>
+                                Gym Membership
+                            </h4>
+
+                            <p>
+                                Fitness
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="expense-usage">
+                        Rarely
+                    </div>
+
+
+                    <div class="expense-price">
+                        ₹999
+                        <span>/month</span>
+                    </div>
+
+
+                    <div class="expense-status warning-status">
+                        Review
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SAVINGS BANNER
+    ========================== -->
+
+    <section class="savings">
+
+        <div>
+
+            <p class="section-label">
+                YOUR SAVINGS OPPORTUNITY
+            </p>
+
+            <h2>
+                You could save up to
+                <span>₹19,428</span> a year.
+            </h2>
+
+            <p>
+                Small monthly changes can make a
+                surprisingly big difference over time.
+            </p>
+
+        </div>
+
+        <a href="#try-it" class="savings-button">
+            Review my expenses →
+        </a>
+
+    </section>
+
+
+
+
+
 </body>
-</html>
+
