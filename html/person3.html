@@ -2,9 +2,568 @@
 <html>
 <head>
     <title>Person 3</title>
+    <link rel="stylesheet" href="../Css/person3.css">
 </head>
 
 <body>
+<!--
+  SpendSense - Person 3
+  Sections:
+  1. Try-it Tool
+  2. Contact
+-->
 
+<!-- =========================
+     TRY-IT TOOL
+     ========================= -->
+
+<section class="try-tool" id="tool">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <p class="section-label">TRY IT</p>
+
+      <h2>
+        See where your recurring money goes.
+      </h2>
+
+      <p>
+        Add your subscriptions and get a simple view of
+        your monthly spending and potential unused spending.
+      </p>
+    </div>
+
+
+    <div class="tool-layout">
+
+      <!-- Add Subscription Form -->
+
+      <div class="tool-card">
+
+        <div class="card-heading">
+          <h3>Add a subscription</h3>
+
+          <p>
+            Enter the details of a subscription you use.
+          </p>
+        </div>
+
+
+        <form id="subscriptionForm">
+
+          <div class="form-group">
+
+            <label for="serviceName">
+              Service name
+            </label>
+
+            <input
+              type="text"
+              id="serviceName"
+              placeholder="Example: Netflix"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="servicePrice">
+                Monthly price
+              </label>
+
+              <input
+                type="number"
+                id="servicePrice"
+                placeholder="499"
+                min="0"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="serviceCategory">
+                Category
+              </label>
+
+              <select id="serviceCategory">
+
+                <option value="Entertainment">
+                  Entertainment
+                </option>
+
+                <option value="Productivity">
+                  Productivity
+                </option>
+
+                <option value="Music">
+                  Music
+                </option>
+
+                <option value="Education">
+                  Education
+                </option>
+
+                <option value="Other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="serviceUsage">
+              How often do you use it?
+            </label>
+
+            <select id="serviceUsage">
+
+              <option value="high">
+                Frequently
+              </option>
+
+              <option value="medium">
+                Sometimes
+              </option>
+
+              <option value="low">
+                Rarely
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary">
+            + Add subscription
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <!-- Spending Summary -->
+
+      <div class="tool-card summary-card">
+
+        <div class="card-heading">
+
+          <h3>Your spending</h3>
+
+          <p>
+            Updates automatically when you add or remove
+            subscriptions.
+          </p>
+
+        </div>
+
+
+        <div class="summary-stats">
+
+          <div class="summary-stat">
+
+            <span>
+              Monthly spending
+            </span>
+
+            <strong id="monthlyTotal">
+              ₹0
+            </strong>
+
+          </div>
+
+
+          <div class="summary-stat">
+
+            <span>
+              Yearly spending
+            </span>
+
+            <strong id="yearlyTotal">
+              ₹0
+            </strong>
+
+          </div>
+
+
+          <div class="summary-stat warning">
+
+            <span>
+              Potential unused
+            </span>
+
+            <strong id="unusedTotal">
+              ₹0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="savings-progress">
+
+          <div class="progress-heading">
+
+            <span>
+              Potential savings
+            </span>
+
+            <strong id="savingPercent">
+              0%
+            </strong>
+
+          </div>
+
+          <div class="progress-track">
+
+            <div
+              class="progress-bar"
+              id="savingBar"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Subscription List -->
+
+    <div class="subscription-area">
+
+      <div class="list-heading">
+
+        <div>
+
+          <p class="section-label">
+            YOUR SUBSCRIPTIONS
+          </p>
+
+          <h3>
+            Subscription list
+          </h3>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="clearSubscriptions"
+        >
+          Clear all
+        </button>
+
+      </div>
+
+
+      <div
+        class="subscription-list"
+        id="subscriptionList"
+      >
+
+        <!-- JavaScript adds subscriptions here -->
+
+        <div class="empty-state" id="emptyState">
+
+          <span class="empty-icon">＋</span>
+
+          <p>
+            No subscriptions added yet.
+          </p>
+
+          <small>
+            Add your first subscription above.
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Money Leak Analysis -->
+
+    <div class="leak-analysis">
+
+      <div class="leak-header">
+
+        <div>
+
+          <p class="section-label">
+            ANALYSIS
+          </p>
+
+          <h3>
+            Potential spending leaks
+          </h3>
+
+          <p>
+            Subscriptions marked as rarely used appear here.
+          </p>
+
+        </div>
+
+        <div class="leak-amount">
+
+          <span>
+            Potential monthly leak
+          </span>
+
+          <strong id="leakAmount">
+            ₹0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="leak-list"
+        id="leakList"
+      >
+
+        <p class="no-leaks">
+          No potential leaks found yet.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- What-if Calculator -->
+
+    <div class="what-if-card">
+
+      <div>
+
+        <p class="section-label">
+          WHAT IF?
+        </p>
+
+        <h3>
+          What happens if you reduce your spending?
+        </h3>
+
+        <p>
+          Move the slider to see the possible yearly impact.
+        </p>
+
+      </div>
+
+
+      <div class="what-if-control">
+
+        <div class="what-if-value">
+
+          <span>
+            Monthly reduction
+          </span>
+
+          <strong id="reductionValue">
+            ₹500
+          </strong>
+
+        </div>
+
+
+        <input
+          type="range"
+          id="reductionSlider"
+          min="0"
+          max="5000"
+          value="500"
+          step="50"
+        >
+
+
+        <div class="what-if-result">
+
+          <span>
+            Possible yearly difference
+          </span>
+
+          <strong id="yearlySaving">
+            ₹6,000
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+     ========================= -->
+
+<section class="contact-section" id="contact">
+
+  <div class="container">
+
+    <div class="contact-layout">
+
+      <!-- Contact Information -->
+
+      <div class="contact-info">
+
+        <p class="section-label">
+          CONTACT
+        </p>
+
+        <h2>
+          Have an idea or feedback?
+        </h2>
+
+        <p>
+          We'd love to hear how SpendSense could become
+          more useful for you.
+        </p>
+
+
+        <div class="contact-points">
+
+          <div class="contact-point">
+
+            <span class="contact-icon">
+              ✓
+            </span>
+
+            <div>
+              <strong>
+                Product feedback
+              </strong>
+
+              <p>
+                Tell us what could be improved.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="contact-point">
+
+            <span class="contact-icon">
+              ?
+            </span>
+
+            <div>
+              <strong>
+                Questions
+              </strong>
+
+              <p>
+                Ask us about the SpendSense concept.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Contact Form -->
+
+      <div class="contact-card">
+
+        <form id="contactForm">
+
+          <div class="form-group">
+
+            <label for="contactName">
+              Your name
+            </label>
+
+            <input
+              type="text"
+              id="contactName"
+              placeholder="Your name"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="contactEmail">
+              Email address
+            </label>
+
+            <input
+              type="email"
+              id="contactEmail"
+              placeholder="you@example.com"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="contactMessage">
+              Message
+            </label>
+
+            <textarea
+              id="contactMessage"
+              rows="5"
+              placeholder="Write your message..."
+              required
+            ></textarea>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Send message →
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script src="../Js/person3.js"></script>
 </body>
 </html>
