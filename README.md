@@ -121,3 +121,27 @@ Spend-Sense/
     ├── person1.js
     ├── person2.js
     └── person3.js
+
+## 👥 Team Contributions
+
+### 👤 Person 1 — Navbar, Hero & Footer
+- Designed and developed the responsive Navbar
+- Added mobile menu functionality
+- Implemented Dark/Light mode
+- Added active navigation link highlighting
+- Developed the Hero section
+- Developed the Footer
+
+### 👤 Person 2 — How It Works, Features, Why SpendSense & Contact
+- Developed the How It Works section
+- Developed the Features section
+- Developed the Why SpendSense section
+- Developed the Contact section
+- Added scroll-triggered reveal animations
+
+### 👤 Person 3 — Try-It Tool
+- Developed the Try-It spending tool
+- Added expense management functionality
+- Implemented add/remove expense features
+- Added total spending calculations
+- Added savings and spending progress calculations
