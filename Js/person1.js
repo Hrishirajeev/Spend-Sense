@@ -21,61 +21,94 @@ links.forEach(function (link) {
 
 // Theme
 function setTheme(theme) {
+
     const isLight = theme === "light";
 
-    const colorMap = isLight
-        ? {
-            "bg-[#0d1916]": "bg-[#f5f7f5]",
-            "bg-[#101d1a]": "bg-[#eef3f0]",
-            "bg-[#13221e]": "bg-white",
-            "bg-[#19372f]": "bg-[#e1eee9]",
-            "bg-[#0a1412]": "bg-[#e8eeeb]",
-
-            "text-[#edf5f1]": "text-[#14241f]",
-            "text-[#91a59d]": "text-[#5f716a]",
-
-            "border-[#263832]": "border-[#d3ded9]",
-            "border-[#365048]": "border-[#b9cbc3]"
-        }
-        : {
-            "bg-[#f5f7f5]": "bg-[#0d1916]",
-            "bg-[#eef3f0]": "bg-[#101d1a]",
-            "bg-white": "bg-[#13221e]",
-            "bg-[#e1eee9]": "bg-[#19372f]",
-            "bg-[#e8eeeb]": "bg-[#0a1412]",
-
-            "text-[#14241f]": "text-[#edf5f1]",
-            "text-[#5f716a]": "text-[#91a59d]",
-
-            "border-[#d3ded9]": "border-[#263832]",
-            "border-[#b9cbc3]": "border-[#365048]"
-        };
-
     document.querySelectorAll("*").forEach(function (element) {
-        Object.entries(colorMap).forEach(function ([oldClass, newClass]) {
-            if (element.classList.contains(oldClass)) {
-                element.classList.remove(oldClass);
-                element.classList.add(newClass);
-            }
-        });
+
+        // Reset inline colors first
+        element.style.backgroundColor = "";
+        element.style.color = "";
+        element.style.borderColor = "";
+
+        if (isLight) {
+            return;
+        }
+
+        // DARK MODE
+
+        // Backgrounds
+        if (element.classList.contains("bg-[#f7f8f3]")) {
+            element.style.backgroundColor = "#0d1916";
+        }
+
+        if (element.classList.contains("bg-white")) {
+            element.style.backgroundColor = "#13221e";
+        }
+
+        if (element.classList.contains("bg-[#eef1e9]")) {
+            element.style.backgroundColor = "#19372f";
+        }
+
+        // Text
+        if (element.classList.contains("text-[#14221b]")) {
+            element.style.color = "#edf5f1";
+        }
+
+        if (element.classList.contains("text-[#60756b]")) {
+            element.style.color = "#91a59d";
+        }
+
+        // Borders
+        if (element.classList.contains("border-[#dce2d9]")) {
+            element.style.borderColor = "#263832";
+        }
     });
+
+    // Navbar
+    if (!isLight) {
+        navbar.style.backgroundColor = "#0d1916";
+        navbar.style.borderColor = "#263832";
+
+        logo.style.color = "#edf5f1";
+        themeBtn.style.color = "#edf5f1";
+        menuBtn.style.color = "#edf5f1";
+
+        document.querySelectorAll("#navbar .nav-link").forEach(function (link) {
+            link.style.color = "#edf5f1";
+        });
+    } else {
+        navbar.style.backgroundColor = "";
+        navbar.style.borderColor = "";
+
+        logo.style.color = "";
+        themeBtn.style.color = "";
+        menuBtn.style.color = "";
+
+        document.querySelectorAll("#navbar .nav-link").forEach(function (link) {
+            link.style.color = "";
+        });
+    }
 
     localStorage.setItem("spendsense_theme", theme);
 }
 
+
 themeBtn.addEventListener("click", function () {
+
     const currentTheme =
-        localStorage.getItem("spendsense_theme") || "dark";
+        localStorage.getItem("spendsense_theme") || "light";
 
     const newTheme =
-        currentTheme === "dark" ? "light" : "dark";
+        currentTheme === "light" ? "dark" : "light";
 
     setTheme(newTheme);
 });
 
+
 // Load saved theme
 const savedTheme =
-    localStorage.getItem("spendsense_theme") || "dark";
+    localStorage.getItem("spendsense_theme") || "light";
 
 setTheme(savedTheme);
 
