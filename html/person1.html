@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SpendSense</title>
@@ -14,38 +12,68 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../Css/person1.css">
-
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="./src/output.css">
 </head>
 
-
-<body>
+<body
+    id="body"
+    class="bg-[#0d1916] text-[#edf5f1]">
 
     <!-- NAVBAR -->
 
-    <nav class="p1-navbar">
+    <nav
+        id="navbar"
+        class="sticky top-0 z-50
+               bg-[#0d1916]
+               border-b border-[#263832]">
 
-        <div class="p1-nav-inner">
+        <div
+            class="max-w-[1120px] mx-auto
+                   px-4
+                   h-[68px]
+                   flex
+                   items-center
+                   justify-between">
 
 
             <!-- LOGO -->
 
-            <a href="#home" class="p1-brand">
+            <a
+                id="logo"
+                href="#home"
+                class="flex
+                       items-center
+                       gap-3
+                       text-xl
+                       font-bold
+                       text-[#edf5f1]">
 
-                <i class="fa-solid fa-wallet"></i>
+                <i class="fa-solid fa-wallet text-[#52bea0]"></i>
 
                 <span>SpendSense</span>
 
             </a>
 
 
-            <!-- MOBILE MENU -->
+            <!-- MOBILE MENU BUTTON -->
 
             <button
-                class="p1-menu-btn"
                 id="p1MenuBtn"
-                aria-label="Open menu">
+                aria-label="Open menu"
+
+                class="min-[901px]:hidden
+                       w-9
+                       h-9
+                       border
+                       border-[#263832]
+                       rounded-lg
+                       flex
+                       items-center
+                       justify-center
+                       hover:text-[#52bea0]
+                       hover:border-[#52bea0]
+                       transition">
 
                 <i class="fa-solid fa-bars"></i>
 
@@ -54,25 +82,127 @@
 
             <!-- NAV LINKS -->
 
-            <div class="p1-nav-links" id="p1NavLinks">
+            <div
+                id="p1NavLinks"
 
-                <a href="#how">How it works</a>
+                class="min-[901px]:flex
+                       min-[901px]:items-center
+                       min-[901px]:gap-7
 
-                <a href="#features">Features</a>
+                       max-[900px]:absolute
+                       max-[900px]:top-[68px]
+                       max-[900px]:left-0
+                       max-[900px]:right-0
 
-                <a href="#try">Try it</a>
+                       max-[900px]:flex
+                       max-[900px]:flex-col
+                       max-[900px]:items-start
+                       max-[900px]:gap-0
+                       max-[900px]:p-4
 
-                <a href="#why">Why this</a>
+                       max-[900px]:hidden
 
-                <a href="#contact">Contact</a>
+                       max-[900px]:bg-[#0d1916]
+                       max-[900px]:border-b
+                       max-[900px]:border-[#263832]">
 
 
-                <!-- DARK / LIGHT BUTTON -->
+                <!-- HOW IT WORKS -->
+<a
+    href="#how"
+    class="nav-link
+           py-3
+           text-[#91a59d]
+           hover:text-[#52bea0]
+           transition
+
+           max-[900px]:w-full
+           max-[900px]:border-b
+           max-[900px]:border-[#263832]">
+    How it works
+</a>
+
+<!-- FEATURES -->
+<a
+    href="#features"
+    class="nav-link
+           py-3
+           text-[#91a59d]
+           hover:text-[#52bea0]
+           transition
+
+           max-[900px]:w-full
+           max-[900px]:border-b
+           max-[900px]:border-[#263832]">
+    Features
+</a>
+
+<!-- TRY IT -->
+<a
+    href="#try"
+    class="nav-link
+           py-3
+           text-[#91a59d]
+           hover:text-[#52bea0]
+           transition
+
+           max-[900px]:w-full
+           max-[900px]:border-b
+           max-[900px]:border-[#263832]">
+    Try it
+</a>
+
+<!-- WHY THIS -->
+<a
+    href="#why"
+    class="nav-link
+           py-3
+           text-[#91a59d]
+           hover:text-[#52bea0]
+           transition
+
+           max-[900px]:w-full
+           max-[900px]:border-b
+           max-[900px]:border-[#263832]">
+    Why this
+</a>
+
+<!-- CONTACT -->
+<a
+    href="#contact"
+    class="nav-link
+           py-3
+           text-[#91a59d]
+           hover:text-[#52bea0]
+           transition
+
+           max-[900px]:w-full
+           max-[900px]:border-b
+           max-[900px]:border-[#263832]">
+    Contact
+</a>
+
+
+                <!-- THEME BUTTON -->
 
                 <button
-                    class="p1-theme-btn"
                     id="p1ThemeBtn"
-                    aria-label="Toggle dark mode">
+                    aria-label="Toggle dark mode"
+
+                    class="w-9
+                           h-9
+                           mt-2
+                           min-[901px]:mt-0
+                           border
+                           border-[#263832]
+                           rounded-lg
+                           text-[#edf5f1]
+                           flex
+                           items-center
+                           justify-center
+                           hover:text-[#52bea0]
+                           hover:border-[#52bea0]
+                           transition">
 
                     <i class="fa-solid fa-circle-half-stroke"></i>
 
@@ -84,10 +214,6 @@
 
     </nav>
 
-
-
-
-    <!-- JAVASCRIPT -->
 
     <script src="../Js/person1.js"></script>
 
