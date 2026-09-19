@@ -216,33 +216,74 @@
 
  <!-- HERO -->
 
-<section id="home" class="py-[72px] pb-16">
-    <div class="max-w-[1120px] mx-auto px-6 grid min-[881px]:grid-cols-[1.15fr_0.85fr] gap-12 items-center max-[880px]: grid-cols-1">
+ <section id="home" class="py-[72px] pb-16">
+
+    <div class="max-w-[1120px] mx-auto px-6
+                grid min-[881px]:grid-cols-[1.15fr_0.85fr]
+                gap-12 items-center
+                max-[880px]:grid-cols-1">
 
         <!-- LEFT -->
-
         <div>
 
-            <h1 class="text-[clamp(2rem,4.2vw,3rem)] leading-[1.12] font-medium mb-5">  <!--32px(min)────── Adjust according to the screen size ──────48px(max)-->
+            <h1 id="heroTitle"
+                class="text-[clamp(2rem,4.2vw,3rem)]
+                       leading-[1.12]
+                       font-medium
+                       mb-5
+                       text-[#14241f]">
+
                 See exactly where your money quietly leaks every month.
+
             </h1>
 
-            <p class="text-[#91a59d] text-[17px] max-w-[46ch] mb-8">
+
+            <p id="heroText"
+               class="text-[#5b6b65]
+                      text-[17px]
+                      max-w-[46ch]
+                      mb-8">
+
                 Add what you pay for, mark how often you actually use it,
                 and watch the number that matters — money wasted — update instantly.
+
             </p>
+
 
             <div class="flex gap-4 flex-wrap">
 
-                <a href="#try"
-                    class="inline-block bg-[#1f6f5c] text-white px-5 py-3 rounded-lg text-[15px] font-semibold hover:opacity-90 transition">
-                    Try it now
-                </a>
+               <a href="#try" 
+          class="inline-block 
+          bg-[#1f6f5c] 
+          text-white 
+          px-5 py-3 
+          rounded-lg 
+          text-[15px] 
+          font-semibold 
+          hover:opacity-90 
+          hover:border-[#ffffff] 
+          border border-transparent
+          transition"> 
 
-                <a href="#how"
-                    class="inline-block border border-[#263832] text-[#edf5f1] px-5 py-3 rounded-lg text-[15px] font-semibold hover:border-[#91a59d] transition">
-                    See how it works
-                </a>
+    Try it now 
+
+</a>
+
+<a id="heroSecondaryBtn" 
+   href="#how" 
+   class="inline-block 
+          border 
+          border-[#dce5df]
+          text-[#14241f] 
+          px-5 py-3 
+          rounded-lg 
+          text-[15px] 
+          font-semibold 
+          transition"> 
+
+    See how it works 
+
+</a>
 
             </div>
 
@@ -251,42 +292,77 @@
 
         <!-- RIGHT CARD -->
 
-        <div class="bg-[#142420] border border-[#263832] rounded-2xl p-6">
+        <div id="heroCard"
+             class="bg-white
+                    border
+                    border-[#dce5df]
+                    rounded-2xl
+                    p-6">
 
             <div class="flex items-center gap-5">
 
-                <div class="w-[84px] h-[84px] rounded-full shrink-0 border border-black
-                bg-[conic-gradient(#ea580c_0deg_130deg,#52d6c4_130deg_360deg)]
-                relative">
+                <div
+                    class="w-[84px]
+                           h-[84px]
+                           rounded-full
+                           shrink-0
+                           border border-black
+                           bg-[conic-gradient(#ea580c_0deg_130deg,#52d6c4_130deg_360deg)]
+                           relative">
 
-                    <div class="absolute inset-[11px] rounded-full bg-[#142420] border border-black">
-
+                    <div id="heroCircleInner"
+                         class="absolute
+                                inset-[11px]
+                                rounded-full
+                                bg-white
+                                border border-black">
                     </div>
 
                 </div>
 
+
                 <div>
 
-                    <p class="text-[#91a59d] text-sm mb-1">
+                    <p id="heroMonth"
+                       class="text-[#5b6b65]
+                              text-sm
+                              mb-1">
+
                         This month
+
                     </p>
 
-                    <p class="text-[#c2542c] text-[30px] font-medium">
+
+                    <p class="text-[#c2542c]
+                              text-[30px]
+                              font-medium">
+
                         ₹1,619
+
                     </p>
 
                 </div>
 
             </div>
 
-            <p class="text-[#91a59d] text-sm mt-4 pt-4 border-t border-[#263832]">
+
+            <p id="heroCardText"
+               class="text-[#5b6b65]
+                      text-sm
+                      mt-4
+                      pt-4
+                      border-t
+                      border-[#dce5df]">
+
                 Leaking on a gym membership and a music plan,
                 both barely opened this month.
+
             </p>
 
         </div>
 
     </div>
+
 </section>
 
 
