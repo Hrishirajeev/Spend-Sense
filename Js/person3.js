@@ -1,308 +1,483 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Get the elements we need from the HTML
-    const subscriptionForm = document.getElementById("subscriptionForm");
-    const serviceName = document.getElementById("serviceName");
-    const servicePrice = document.getElementById("servicePrice");
-    const serviceCategory = document.getElementById("serviceCategory");
-    const serviceUsage = document.getElementById("serviceUsage");
+document.addEventListener("DOMContentLoaded", () => {
+    const $ = id => document.getElementById(id);
 
-    const subscriptionList = document.getElementById("subscriptionList");
-    const clearSubscriptions = document.getElementById("clearSubscriptions");
+    const form = $("subscriptionForm");
+    const nameInput = $("serviceName");
+    const priceInput = $("servicePrice");
+    const categoryInput = $("serviceCategory");
+    const usageInput = $("serviceUsage");
 
-    const monthlyTotal = document.getElementById("monthlyTotal");
-    const yearlyTotal = document.getElementById("yearlyTotal");
-    const unusedTotal = document.getElementById("unusedTotal");
+    const list = $("subscriptionList");
+    const clearButton = $("clearSubscriptions");
+    const leakList = $("leakList");
 
-    const savingPercent = document.getElementById("savingPercent");
-    const savingBar = document.getElementById("savingBar");
+    const monthlyTotal = $("monthlyTotal");
+    const activeCount = $("activeCount");
+    const unusedTotal = $("unusedTotal");
+    const leakAmount = $("leakAmount");
 
-    const leakList = document.getElementById("leakList");
-    const leakAmount = document.getElementById("leakAmount");
+    const heroMonthly = $("heroMonthly");
+    const heroCount = $("heroCount");
+    const heroLeak = $("heroLeak");
+    const heroPercent = $("heroPercent");
+    const heroBar = $("heroBar");
+    const heroYearlyLeak = $("heroYearlyLeak");
 
-    const reductionSlider = document.getElementById("reductionSlider");
-    const reductionValue = document.getElementById("reductionValue");
-    const yearlySaving = document.getElementById("yearlySaving");
+    const goalAmount = $("goalAmount");
+    const goalSaved = $("goalSaved");
+    const goalPercent = $("goalPercent");
+    const goalBar = $("goalBar");
+    const insights = $("insights");
 
-    const contactForm = document.getElementById("contactForm");
-    const contactName = document.getElementById("contactName");
-
-    // Store subscriptions in an array
-    let subscriptions = [];
-
-    // Load saved subscriptions from the browser
-    const savedSubscriptions = localStorage.getItem(
-        "spendsenseSubscriptions"
+    let subscriptions = JSON.parse(
+        localStorage.getItem("spendsenseSubscriptions") || "[]"
     );
 
-    if (savedSubscriptions) {
-        subscriptions = JSON.parse(savedSubscriptions);
-    }
+    let currentFilter = "all";
+    let categoryChart;
+    let trendChart;
+    let leakChart;
 
-    // Convert a number into money format
-    function formatCurrency(amount) {
-        return "₹" + amount.toLocaleString("en-IN", {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2
+    const colors = {
+        Entertainment: "#157653",
+        Productivity: "#f59b00",
+        Music: "#7c83ff",
+        Education: "#e36ca1",
+        Other: "#55a6a0"
+    };
+
+    function money(value) {
+        return "₹" + Number(value).toLocaleString("en-IN", {
+            maximumFractionDigits: 0
         });
     }
 
-    // Save the current subscriptions
-    function saveSubscriptions() {
+    function save() {
         localStorage.setItem(
             "spendsenseSubscriptions",
             JSON.stringify(subscriptions)
         );
     }
 
-    // Display all subscriptions
-    function renderSubscriptions() {
-        subscriptionList.innerHTML = "";
+    function escapeHTML(value) {
+        const div = document.createElement("div");
+        div.textContent = value;
+        return div.innerHTML;
+    }
 
-        if (subscriptions.length === 0) {
-            subscriptionList.innerHTML = `
-                <div class="empty-state" id="emptyState">
-                    <div class="empty-icon">📋</div>
-                    <h3>No subscriptions added yet</h3>
-                    <p>Add your first subscription to start tracking your spending.</p>
+    function getTotals() {
+        const monthly = subscriptions.reduce(
+            (sum, item) => sum + Number(item.price),
+            0
+        );
+
+        const unused = subscriptions
+            .filter(item => item.usage === "low")
+            .reduce((sum, item) => sum + Number(item.price), 0);
+
+        return {
+            monthly,
+            yearly: monthly * 12,
+            unused
+        };
+    }
+
+    function renderList() {
+        list.innerHTML = "";
+
+        const filtered = subscriptions.filter(item => {
+            if (currentFilter === "all") return true;
+            return item.usage === currentFilter;
+        });
+
+        if (!filtered.length) {
+            list.innerHTML = `
+                <div class="rounded-2xl border border-dashed border-[#dce2d9] p-8 text-center text-[#60756b]">
+                    No subscriptions in this category.
                 </div>
             `;
             return;
         }
 
-        subscriptions.forEach(function (subscription) {
-            const item = document.createElement("div");
-            item.className = "subscription-item";
+        filtered.forEach(item => {
+            const usageText = {
+                high: "Frequent",
+                medium: "Sometimes",
+                low: "Rarely used"
+            }[item.usage];
 
-            let usageClass = "usage-low";
+            const badgeClass =
+                item.usage === "low"
+                    ? "bg-[#fff0cc] text-[#d98700]"
+                    : "bg-[#dcefe7] text-[#157653]";
 
-            if (subscription.usage === "High") {
-                usageClass = "usage-high";
-            } else if (subscription.usage === "Medium") {
-                usageClass = "usage-medium";
-            }
+            const element = document.createElement("div");
 
-            item.innerHTML = `
-                <div class="service-icon">💳</div>
+            element.className =
+                "flex items-center gap-4 rounded-2xl border border-[#dce2d9] bg-white p-4";
 
-                <div class="service-details">
-                    <div class="service-name">${escapeHTML(subscription.name)}</div>
-                    <div class="service-category">
-                        ${escapeHTML(subscription.category)}
-                    </div>
+            element.innerHTML = `
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#dcefe7] font-bold text-[#157653]">
+                    ${escapeHTML(item.name.charAt(0).toUpperCase())}
                 </div>
 
-                <span class="usage-badge ${usageClass}">
-                    ${escapeHTML(subscription.usage)}
+                <div class="min-w-0 flex-1">
+                    <strong class="block truncate">${escapeHTML(item.name)}</strong>
+                    <span class="text-sm text-[#60756b]">
+                        ${escapeHTML(item.category)}
+                    </span>
+                </div>
+
+                <span class="rounded-lg px-3 py-2 text-xs font-bold ${badgeClass}">
+                    ${usageText}
                 </span>
 
-                <div class="service-price">
-                    ${formatCurrency(subscription.price)}
-                    <small>/month</small>
-                </div>
+                <strong>${money(item.price)}</strong>
 
                 <button
-                    class="remove-subscription"
-                    data-id="${subscription.id}"
-                    aria-label="Remove ${escapeHTML(subscription.name)}"
+                    type="button"
+                    class="remove-btn px-2 text-xl text-[#60756b] hover:text-red-500"
+                    data-id="${item.id}"
                 >
                     ×
                 </button>
             `;
 
-            subscriptionList.appendChild(item);
+            list.appendChild(element);
         });
 
-        // Add remove functionality to each button
-        const removeButtons = document.querySelectorAll(
-            ".remove-subscription"
-        );
-
-        removeButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
+        document.querySelectorAll(".remove-btn").forEach(button => {
+            button.addEventListener("click", () => {
                 const id = Number(button.dataset.id);
 
-                subscriptions = subscriptions.filter(function (subscription) {
-                    return subscription.id !== id;
-                });
+                subscriptions = subscriptions.filter(
+                    item => item.id !== id
+                );
 
-                saveSubscriptions();
-                renderSubscriptions();
-                updateDashboard();
+                save();
+                updateEverything();
             });
         });
     }
 
-    // Calculate and display totals
-    function updateDashboard() {
-        let monthly = 0;
-        let unused = 0;
+    function updateStats() {
+        const totals = getTotals();
 
-        for (let i = 0; i < subscriptions.length; i++) {
-            monthly += subscriptions[i].price;
+        monthlyTotal.textContent = money(totals.monthly);
+        activeCount.textContent = subscriptions.length;
+        unusedTotal.textContent = money(totals.unused);
 
-            if (subscriptions[i].usage === "Low") {
-                unused += subscriptions[i].price;
-            }
-        }
+        heroMonthly.textContent = money(totals.monthly);
+        heroCount.textContent = subscriptions.length;
+        heroLeak.textContent = money(totals.unused);
+        heroYearlyLeak.textContent = money(totals.unused * 12);
 
-        const yearly = monthly * 12;
+        const percent = totals.monthly
+            ? Math.round((totals.unused / totals.monthly) * 100)
+            : 0;
 
-        let percentage = 0;
-
-        if (monthly > 0) {
-            percentage = (unused / monthly) * 100;
-        }
-
-        monthlyTotal.textContent = formatCurrency(monthly);
-        yearlyTotal.textContent = formatCurrency(yearly);
-        unusedTotal.textContent = formatCurrency(unused);
-
-        savingPercent.textContent = Math.round(percentage) + "%";
-        savingBar.style.width = Math.min(percentage, 100) + "%";
-
-        leakAmount.textContent = formatCurrency(unused);
-
-        renderLeakAnalysis();
-        updateWhatIf();
+        heroPercent.textContent = percent + "%";
+        heroBar.style.width = Math.min(percent, 100) + "%";
     }
 
-    // Display subscriptions that have low usage
-    function renderLeakAnalysis() {
-        leakList.innerHTML = "";
+    function updateCategoryChart() {
+        const totals = {};
 
-        let lowUsageFound = false;
+        subscriptions.forEach(item => {
+            totals[item.category] =
+                (totals[item.category] || 0) + Number(item.price);
+        });
 
-        subscriptions.forEach(function (subscription) {
-            if (subscription.usage === "Low") {
-                lowUsageFound = true;
+        const labels = Object.keys(totals);
+        const values = Object.values(totals);
 
-                const leakItem = document.createElement("div");
-                leakItem.className = "leak-item";
+        if (categoryChart) categoryChart.destroy();
 
-                leakItem.innerHTML = `
-                    <div>
-                        <strong>${escapeHTML(subscription.name)}</strong>
-                        <span>Low usage</span>
-                    </div>
-
-                    <strong>${formatCurrency(subscription.price)}/mo</strong>
-                `;
-
-                leakList.appendChild(leakItem);
+        categoryChart = new Chart($("categoryChart"), {
+            type: "doughnut",
+            data: {
+                labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: labels.map(
+                        label => colors[label] || "#55a6a0"
+                    ),
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: "58%",
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }
         });
 
-        if (!lowUsageFound) {
-            leakList.innerHTML = `
-                <div class="leak-empty">
-                    🎉 No low-usage subscriptions found.
+        const legend = $("categoryLegend");
+        legend.innerHTML = "";
+
+        labels.forEach(label => {
+            legend.innerHTML += `
+                <div class="flex items-center gap-2">
+                    <span
+                        class="h-3 w-3 rounded-full"
+                        style="background:${colors[label] || "#55a6a0"}"
+                    ></span>
+                    <span>${escapeHTML(label)}</span>
                 </div>
             `;
+        });
+    }
+
+    function updateTrendChart() {
+        const monthly = getTotals().monthly;
+
+        if (trendChart) trendChart.destroy();
+
+        trendChart = new Chart($("trendChart"), {
+            type: "bar",
+            data: {
+                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+                datasets: [{
+                    data: [
+                        monthly * 0.92,
+                        monthly * 0.98,
+                        monthly * 0.95,
+                        monthly * 1.02,
+                        monthly * 1.01,
+                        monthly
+                    ],
+                    backgroundColor: [
+                        "#157653",
+                        "#157653",
+                        "#157653",
+                        "#157653",
+                        "#157653",
+                        "#157653"
+                    ],
+                    borderRadius: 8,
+                    borderSkipped: false,
+                    barThickness: 42
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    function updateLeakChart() {
+        const totals = getTotals();
+
+        const percent = totals.monthly
+            ? Math.round((totals.unused / totals.monthly) * 100)
+            : 0;
+
+        if (leakChart) leakChart.destroy();
+
+        leakChart = new Chart($("leakChart"), {
+            type: "doughnut",
+            data: {
+                labels: ["Potential leak", "Other spending"],
+                datasets: [{
+                    data: [
+                        percent,
+                        Math.max(100 - percent, 0)
+                    ],
+                    backgroundColor: [
+                        "#f59b00",
+                        "#e9eee7"
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: "72%",
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            },
+            plugins: [{
+                id: "centerText",
+                afterDraw(chart) {
+                    const { ctx } = chart;
+                    const x = chart.width / 2;
+                    const y = chart.height / 2;
+
+                    ctx.save();
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = "#14221b";
+                    ctx.font = "bold 38px Arial";
+                    ctx.fillText(percent + "%", x, y);
+
+                    ctx.fillStyle = "#60756b";
+                    ctx.font = "13px Arial";
+                    ctx.fillText("of monthly spend", x, y + 28);
+                    ctx.restore();
+                }
+            }]
+        });
+
+        leakList.innerHTML = "";
+
+        const leaks = subscriptions.filter(item => item.usage === "low");
+
+        if (!leaks.length) {
+            leakList.innerHTML = `
+                <div class="rounded-2xl border border-[#dce2d9] bg-white p-5 text-[#60756b]">
+                    No rarely-used subscriptions found.
+                </div>
+            `;
+        } else {
+            leaks.forEach(item => {
+                leakList.innerHTML += `
+                    <div class="flex items-center justify-between rounded-2xl border border-[#dce2d9] bg-white p-4">
+                        <span>${escapeHTML(item.name)}</span>
+                        <strong class="text-[#f59b00]">${money(item.price)}/mo</strong>
+                    </div>
+                `;
+            });
         }
+
+        leakAmount.textContent = money(totals.unused);
     }
 
-    // Calculate possible yearly savings
-    function updateWhatIf() {
-        const reduction = Number(reductionSlider.value);
+    function updateGoal() {
+        const goal = Math.max(Number(goalAmount.value) || 0, 1);
+        const saved = getTotals().unused * 12;
 
-        let monthly = 0;
+        const percent = Math.min(
+            Math.round((saved / goal) * 100),
+            100
+        );
 
-        for (let i = 0; i < subscriptions.length; i++) {
-            monthly += subscriptions[i].price;
-        }
-
-        const possibleMonthlySaving = monthly * (reduction / 100);
-        const possibleYearlySaving = possibleMonthlySaving * 12;
-
-        reductionValue.textContent = reduction + "%";
-        yearlySaving.textContent = formatCurrency(possibleYearlySaving);
+        goalSaved.textContent = money(saved);
+        goalPercent.textContent = percent + "%";
+        goalBar.style.width = percent + "%";
     }
 
-    // Prevent user-entered text from being treated as HTML
-    function escapeHTML(text) {
-        const element = document.createElement("div");
-        element.textContent = text;
-        return element.innerHTML;
+    function updateInsights() {
+        const totals = getTotals();
+
+        const yearly = totals.yearly;
+        const yearlyUnused = totals.unused * 12;
+
+        insights.innerHTML = `
+            <div class="rounded-2xl bg-[#eef1e9] p-5">
+                ✓ You currently track ${subscriptions.length} subscription${subscriptions.length === 1 ? "" : "s"}.
+            </div>
+
+            <div class="rounded-2xl bg-[#eef1e9] p-5">
+                ✓ ${money(totals.unused)} per month is linked to subscriptions marked as rarely used.
+            </div>
+
+            <div class="rounded-2xl bg-[#eef1e9] p-5">
+                ✓ Your current recurring spending equals approximately ${money(yearly)} per year.
+            </div>
+
+            <div class="rounded-2xl bg-[#eef1e9] p-5">
+                ✓ Reviewing rarely-used services could represent up to ${money(yearlyUnused)} in annual spending.
+            </div>
+        `;
     }
 
-    // Add a new subscription
-    subscriptionForm.addEventListener("submit", function (event) {
+    function updateEverything() {
+        renderList();
+        updateStats();
+        updateCategoryChart();
+        updateTrendChart();
+        updateLeakChart();
+        updateGoal();
+        updateInsights();
+    }
+
+    form.addEventListener("submit", event => {
         event.preventDefault();
 
-        const name = serviceName.value.trim();
-        const price = Number(servicePrice.value);
-        const category = serviceCategory.value;
-        const usage = serviceUsage.value;
+        const name = nameInput.value.trim();
+        const price = Number(priceInput.value);
 
-        if (name === "" || price <= 0) {
+        if (!name || price <= 0) {
             alert("Please enter a valid service name and price.");
             return;
         }
 
-        const newSubscription = {
+        subscriptions.push({
             id: Date.now(),
-            name: name,
-            price: price,
-            category: category,
-            usage: usage
-        };
+            name,
+            price,
+            category: categoryInput.value,
+            usage: usageInput.value
+        });
 
-        subscriptions.push(newSubscription);
-
-        saveSubscriptions();
-        renderSubscriptions();
-        updateDashboard();
-
-        subscriptionForm.reset();
-
-        alert("Subscription added successfully!");
+        save();
+        form.reset();
+        updateEverything();
     });
 
-    // Clear all subscriptions
-    clearSubscriptions.addEventListener("click", function () {
-        if (subscriptions.length === 0) {
-            return;
-        }
+    clearButton.addEventListener("click", () => {
+        if (!subscriptions.length) return;
 
-        const confirmed = confirm(
-            "Are you sure you want to remove all subscriptions?"
-        );
-
-        if (confirmed) {
+        if (confirm("Remove all subscriptions?")) {
             subscriptions = [];
-
-            saveSubscriptions();
-            renderSubscriptions();
-            updateDashboard();
+            save();
+            updateEverything();
         }
     });
 
-    // Update the What-If calculator whenever the slider moves
-    reductionSlider.addEventListener("input", function () {
-        updateWhatIf();
+    document.querySelectorAll(".filter-btn").forEach(button => {
+        button.addEventListener("click", () => {
+            currentFilter = button.dataset.filter;
+
+            document.querySelectorAll(".filter-btn").forEach(item => {
+                item.classList.remove("bg-[#dcefe7]", "text-[#157653]");
+                item.classList.add("border", "border-[#dce2d9]");
+            });
+
+            button.classList.add("bg-[#dcefe7]", "text-[#157653]");
+            button.classList.remove("border", "border-[#dce2d9]");
+
+            renderList();
+        });
     });
 
-    // Frontend-only contact form handling
-    contactForm.addEventListener("submit", function (event) {
+    goalAmount.addEventListener("input", updateGoal);
+
+    $("contactForm").addEventListener("submit", event => {
         event.preventDefault();
 
-        const name = contactName.value.trim();
-
-        if (name === "") {
-            alert("Please enter your name.");
-            return;
-        }
+        const name = $("contactName").value.trim();
 
         alert(
-            "Thanks, " +
-            name +
-            "! Your message has been received in this prototype."
+            `Thanks, ${name}! Your message has been received in this prototype.`
         );
 
-        contactForm.reset();
+        event.target.reset();
     });
 
-    // Run everything when the page first loads
-    renderSubscriptions();
-    updateDashboard();
+    updateEverything();
 });

@@ -1,16 +1,564 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SpendSense</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
-    
-<div id="person1"></div>
+<body id="body" class="bg-[#f7f8f3] text-[#14221b] antialiased">
 
-<div id="person2"></div>
+    <!-- NAVBAR -->
+    <header id="navbar" class="sticky top-0 z-50 border-b border-[#dce2d9] bg-white/95 backdrop-blur">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+            <a id="logo" href="#home" class="flex items-center gap-3 text-xl font-bold">
+                <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#157653] text-xl text-white">S</span>
+                SpendSense
+            </a>
 
-<div id="person3"></div>
+            <button id="p1MenuBtn" class="text-2xl md:hidden">☰</button>
+
+            <div id="p1NavLinks" class="hidden items-center gap-8 md:flex">
+                <a class="nav-link rounded-xl px-4 py-2 text-sm font-semibold" href="#home">Home</a>
+                <a class="nav-link rounded-xl px-4 py-2 text-sm font-semibold" href="#dashboard">Dashboard</a>
+                <a class="nav-link rounded-xl px-4 py-2 text-sm font-semibold" href="#features">Features</a>
+                <a class="nav-link rounded-xl px-4 py-2 text-sm font-semibold" href="#why">About</a>
+                <a class="nav-link rounded-xl px-4 py-2 text-sm font-semibold" href="#contact">Contact</a>
+
+                <button id="p1ThemeBtn" class="rounded-xl border border-[#dce2d9] px-4 py-3">
+                    ☾
+                </button>
+
+                <a href="#try" class="rounded-xl bg-[#157653] px-6 py-3 font-bold text-white">
+                    Try SpendSense
+                </a>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section id="home" class="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 md:py-28 lg:grid-cols-2">
+
+            <div>
+                <span class="inline-flex rounded-full bg-[#dcefe7] px-4 py-2 text-sm font-bold text-[#157653]">
+                    ● &nbsp; Smarter recurring spending
+                </span>
+
+                <h1 class="mt-8 max-w-2xl text-6xl font-black leading-[0.95] tracking-tight md:text-7xl">
+                    Know where
+                    <br>
+                    your <span class="text-[#157653]">money</span>
+                    <br>
+                    goes.
+                </h1>
+
+                <p class="mt-7 max-w-2xl text-lg leading-8 text-[#60756b]">
+                    SpendSense helps you understand recurring subscriptions,
+                    identify potential unused spending and see what your
+                    savings could look like.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="#try" class="rounded-xl bg-[#157653] px-6 py-4 font-bold text-white">
+                        Start analysing →
+                    </a>
+
+                    <a href="#how" class="rounded-xl border border-[#d7ded7] bg-white px-6 py-4 font-bold">
+                        See how it works
+                    </a>
+                </div>
+
+                <p class="mt-5 text-sm text-[#60756b]">
+                    No bank connection required. Enter your subscriptions manually.
+                </p>
+            </div>
+
+
+            <!-- HERO PREVIEW -->
+            <div class="relative">
+                <div class="rotate-1 rounded-[2rem] border border-[#dce2d9] bg-white p-6 shadow-xl">
+
+                    <div class="mb-6 flex gap-2">
+                        <span class="h-3 w-3 rounded-full bg-[#dce2d9]"></span>
+                        <span class="h-3 w-3 rounded-full bg-[#dce2d9]"></span>
+                        <span class="h-3 w-3 rounded-full bg-[#dce2d9]"></span>
+                    </div>
+
+                    <h3 class="text-xl font-bold">Your spending overview</h3>
+
+                    <p class="mt-8 text-sm text-[#60756b]">Monthly subscriptions</p>
+                    <strong id="heroMonthly" class="mt-2 block text-4xl font-black">₹2,147</strong>
+
+                    <div class="mt-8 grid grid-cols-2 gap-4">
+                        <div class="rounded-2xl bg-[#eef1e9] p-5">
+                            <p class="text-sm text-[#60756b]">Subscriptions</p>
+                            <strong id="heroCount" class="mt-2 block text-xl">7</strong>
+                        </div>
+
+                        <div class="rounded-2xl bg-[#eef1e9] p-5">
+                            <p class="text-sm text-[#60756b]">Potential leak</p>
+                            <strong id="heroLeak" class="mt-2 block text-xl text-[#f59b00]">₹612</strong>
+                        </div>
+                    </div>
+
+                    <div class="mt-7">
+                        <div class="flex justify-between text-sm text-[#60756b]">
+                            <span>Savings opportunity</span>
+                            <span id="heroPercent">28%</span>
+                        </div>
+
+                        <div class="mt-2 h-3 rounded-full bg-[#e9eee7]">
+                            <div id="heroBar" class="h-full w-[38%] rounded-full bg-gradient-to-r from-[#157653] to-[#6bd5ad]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute -bottom-7 -right-4 rounded-2xl bg-white p-5 shadow-xl">
+                    <p class="text-sm text-[#60756b]">Potential yearly savings</p>
+                    <strong id="heroYearlyLeak" class="mt-2 block text-2xl font-black text-[#157653]">
+                        ₹7,344
+                    </strong>
+                    <p class="mt-2 text-sm text-[#60756b]">if unused services are reduced</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- PROBLEM -->
+        <section id="features" class="bg-white">
+            <div class="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2">
+
+                <div>
+                    <p class="text-sm font-bold tracking-[2px] text-[#157653]">THE PROBLEM</p>
+
+                    <h2 class="mt-5 max-w-xl text-5xl font-light leading-tight">
+                        Small recurring payments can become a
+                        <span class="text-[#157653]">big monthly habit.</span>
+                    </h2>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-2">
+
+                    <article class="rounded-3xl border border-[#dce2d9] bg-[#eef1e9] p-7">
+                        <span class="text-2xl text-[#157653]">₹</span>
+                        <h3 class="mt-7 text-xl font-bold">Recurring spending</h3>
+                        <p class="mt-3 leading-7 text-[#60756b]">
+                            Multiple small subscriptions can make your monthly spending difficult to notice.
+                        </p>
+                    </article>
+
+                    <article class="rounded-3xl border border-[#dce2d9] bg-[#eef1e9] p-7">
+                        <span class="text-2xl text-[#157653]">◌</span>
+                        <h3 class="mt-7 text-xl font-bold">Low usage</h3>
+                        <p class="mt-3 leading-7 text-[#60756b]">
+                            Some services may be paid for even when they are rarely used.
+                        </p>
+                    </article>
+
+                    <article class="rounded-3xl border border-[#dce2d9] bg-[#eef1e9] p-7">
+                        <span class="text-2xl text-[#157653]">↗</span>
+                        <h3 class="mt-7 text-xl font-bold">Yearly impact</h3>
+                        <p class="mt-3 leading-7 text-[#60756b]">
+                            A monthly amount becomes much more meaningful when viewed across an entire year.
+                        </p>
+                    </article>
+
+                    <article class="rounded-3xl border border-[#dce2d9] bg-[#eef1e9] p-7">
+                        <span class="text-2xl text-[#157653]">✓</span>
+                        <h3 class="mt-7 text-xl font-bold">Better visibility</h3>
+                        <p class="mt-3 leading-7 text-[#60756b]">
+                            SpendSense turns scattered subscription information into one simple overview.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+        <section id="how" class="mx-auto max-w-7xl px-6 py-24">
+
+            <p class="text-sm font-bold tracking-[2px] text-[#157653]">HOW IT WORKS</p>
+
+            <h2 class="mt-5 text-5xl font-black">
+                Three simple steps.
+            </h2>
+
+            <p class="mt-4 text-lg text-[#60756b]">
+                SpendSense starts with the information you already know. No complicated setup.
+            </p>
+
+            <div class="mt-12 grid gap-5 md:grid-cols-3">
+
+                <article class="rounded-3xl border border-[#dce2d9] bg-white p-8">
+                    <span class="text-6xl font-black text-[#dcefe7]">01</span>
+                    <h3 class="mt-8 text-xl font-bold">Add your subscriptions</h3>
+                    <p class="mt-4 leading-7 text-[#60756b]">
+                        Enter the service, monthly price, category and how frequently you use it.
+                    </p>
+                </article>
+
+                <article class="rounded-3xl border border-[#dce2d9] bg-white p-8">
+                    <span class="text-6xl font-black text-[#dcefe7]">02</span>
+                    <h3 class="mt-8 text-xl font-bold">Understand your spending</h3>
+                    <p class="mt-4 leading-7 text-[#60756b]">
+                        See your recurring monthly cost, yearly impact and potential unused spending.
+                    </p>
+                </article>
+
+                <article class="rounded-3xl border border-[#dce2d9] bg-white p-8">
+                    <span class="text-6xl font-black text-[#dcefe7]">03</span>
+                    <h3 class="mt-8 text-xl font-bold">Explore your options</h3>
+                    <p class="mt-4 leading-7 text-[#60756b]">
+                        Try different scenarios and see how reducing unused subscriptions could affect your savings.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="bg-white">
+            <div class="mx-auto max-w-7xl px-6 py-24">
+
+                <div class="flex flex-wrap items-end justify-between gap-6">
+                    <div>
+                        <p class="text-sm font-bold tracking-[2px] text-[#157653]">DASHBOARD</p>
+                        <h2 class="mt-5 text-5xl font-black">Your spending at a glance.</h2>
+                    </div>
+
+                    <a href="#try" class="rounded-xl bg-[#157653] px-6 py-4 font-bold text-white">
+                        Add subscription
+                    </a>
+                </div>
+
+
+                <div class="mt-12 grid gap-5 lg:grid-cols-[1.3fr_0.8fr]">
+
+                    <!-- TREND -->
+                    <div class="rounded-3xl border border-[#dce2d9] bg-[#f7f8f3] p-8">
+
+                        <div class="grid gap-4 sm:grid-cols-3">
+
+                            <div class="rounded-2xl border border-[#dce2d9] bg-white p-5">
+                                <p class="text-sm text-[#60756b]">Monthly spending</p>
+                                <strong id="monthlyTotal" class="mt-3 block text-3xl font-black">₹0</strong>
+                            </div>
+
+                            <div class="rounded-2xl border border-[#dce2d9] bg-white p-5">
+                                <p class="text-sm text-[#60756b]">Active subscriptions</p>
+                                <strong id="activeCount" class="mt-3 block text-3xl font-black">0</strong>
+                            </div>
+
+                            <div class="rounded-2xl border border-[#dce2d9] bg-white p-5">
+                                <p class="text-sm text-[#60756b]">Potential unused</p>
+                                <strong id="unusedTotal" class="mt-3 block text-3xl font-black text-[#f59b00]">₹0</strong>
+                            </div>
+
+                        </div>
+
+                        <h3 class="mt-10 text-xl font-bold">Monthly spending trend</h3>
+
+                        <div class="mt-6 h-64">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+
+
+                    <!-- CATEGORY -->
+                    <div class="rounded-3xl border border-[#dce2d9] bg-[#f7f8f3] p-8">
+
+                        <h3 class="text-xl font-bold">Spending by category</h3>
+
+                        <div class="mt-7 flex h-72 items-center justify-center">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+
+                        <div id="categoryLegend" class="mt-5 grid grid-cols-2 gap-3 text-sm"></div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TRY / BUILD -->
+        <section id="try">
+            <div class="mx-auto max-w-7xl px-6 py-24">
+
+                <p class="text-sm font-bold tracking-[2px] text-[#157653]">BUILD YOUR OWN SPENDING PICTURE</p>
+
+                <h2 class="mt-5 max-w-2xl text-5xl font-black leading-tight">
+                    Build your own spending picture.
+                </h2>
+
+                <p class="mt-4 text-lg text-[#60756b]">
+                    Add sample subscriptions or replace them with your own.
+                </p>
+
+
+                <div class="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+
+                    <!-- FORM -->
+                    <div class="rounded-3xl border border-[#dce2d9] bg-white p-8">
+
+                        <h3 class="text-xl font-bold">Add subscription</h3>
+
+                        <p class="mt-2 text-[#60756b]">
+                            Everything happens locally in your browser.
+                        </p>
+
+                        <form id="subscriptionForm" class="mt-8 space-y-5">
+
+                            <div>
+                                <label for="serviceName" class="mb-2 block text-sm font-bold">
+                                    Service name
+                                </label>
+
+                                <input id="serviceName" type="text" placeholder="e.g. Netflix" required
+                                    class="w-full rounded-xl border border-[#dce2d9] bg-[#f7f8f3] px-4 py-4 outline-none focus:border-[#157653]">
+                            </div>
+
+                            <div class="grid gap-4 sm:grid-cols-2">
+
+                                <div>
+                                    <label for="servicePrice" class="mb-2 block text-sm font-bold">
+                                        Monthly price
+                                    </label>
+
+                                    <input id="servicePrice" type="number" placeholder="499" min="1" required
+                                        class="w-full rounded-xl border border-[#dce2d9] bg-[#f7f8f3] px-4 py-4 outline-none focus:border-[#157653]">
+                                </div>
+
+                                <div>
+                                    <label for="serviceCategory" class="mb-2 block text-sm font-bold">
+                                        Category
+                                    </label>
+
+                                    <select id="serviceCategory"
+                                        class="w-full rounded-xl border border-[#dce2d9] bg-[#f7f8f3] px-4 py-4 outline-none focus:border-[#157653]">
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Productivity">Productivity</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <label for="serviceUsage" class="mb-2 block text-sm font-bold">
+                                    Usage
+                                </label>
+
+                                <select id="serviceUsage"
+                                    class="w-full rounded-xl border border-[#dce2d9] bg-[#f7f8f3] px-4 py-4 outline-none focus:border-[#157653]">
+                                    <option value="high">Frequent</option>
+                                    <option value="medium">Sometimes</option>
+                                    <option value="low">Rarely used</option>
+                                </select>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full rounded-xl bg-[#157653] px-5 py-4 font-bold text-white">
+                                Add subscription
+                            </button>
+
+                        </form>
+                    </div>
+
+
+                    <!-- LIST -->
+                    <div class="rounded-3xl border border-[#dce2d9] bg-white p-8">
+
+                        <h3 class="text-xl font-bold">Your subscriptions</h3>
+
+                        <p class="mt-2 text-[#60756b]">Edit your list anytime.</p>
+
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <button class="filter-btn rounded-xl bg-[#dcefe7] px-4 py-3 font-bold text-[#157653]" data-filter="all">All</button>
+                            <button class="filter-btn rounded-xl border border-[#dce2d9] px-4 py-3 font-bold" data-filter="high">Frequent</button>
+                            <button class="filter-btn rounded-xl bg-[#dcefe7] px-4 py-3 font-bold text-[#157653]" data-filter="low">Rarely used</button>
+                        </div>
+
+                        <div id="subscriptionList" class="mt-5 space-y-3"></div>
+
+                        <button id="clearSubscriptions" type="button"
+                            class="mt-5 rounded-xl border border-[#dce2d9] px-4 py-3 text-sm font-bold">
+                            Clear all
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- LEAK ANALYSIS -->
+        <section class="bg-white">
+            <div class="mx-auto max-w-7xl px-6 py-24">
+
+                <p class="text-sm font-bold tracking-[2px] text-[#157653]">LEAK ANALYSIS</p>
+
+                <h2 class="mt-5 max-w-2xl text-5xl font-black leading-tight">
+                    Find potential unused spending.
+                </h2>
+
+                <p class="mt-4 max-w-3xl text-lg leading-8 text-[#60756b]">
+                    SpendSense uses the usage information you enter to highlight subscriptions that may deserve another look.
+                </p>
+
+
+                <div class="mt-12 grid gap-6 lg:grid-cols-2">
+
+                    <div class="rounded-3xl border border-[#dce2d9] bg-[#f7f8f3] p-8">
+
+                        <h3 class="text-xl font-bold">Potential leak</h3>
+
+                        <div class="mx-auto mt-7 h-64 max-w-xs">
+                            <canvas id="leakChart"></canvas>
+                        </div>
+
+                        <p class="mt-6 text-center text-[#60756b]">
+                            Based on subscriptions marked as rarely used.
+                        </p>
+
+                    </div>
+
+
+                    <div class="rounded-3xl border border-[#dce2d9] bg-[#f7f8f3] p-8">
+
+                        <h3 class="text-xl font-bold">Subscriptions to review</h3>
+
+                        <div id="leakList" class="mt-6 space-y-3"></div>
+
+                        <div class="mt-6 rounded-2xl bg-[#eef1e9] p-5">
+                            <p class="text-sm text-[#60756b]">Potential monthly leak</p>
+                            <strong id="leakAmount" class="mt-2 block text-3xl font-black text-[#f59b00]">₹0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SAVINGS -->
+        <section id="why">
+            <div class="mx-auto max-w-7xl px-6 py-24">
+
+                <p class="text-sm font-bold tracking-[2px] text-[#157653]">SAVINGS</p>
+
+                <h2 class="mt-5 text-5xl font-black">
+                    Turn visibility into a goal.
+                </h2>
+
+                <div class="mt-12 grid gap-6 lg:grid-cols-2">
+
+                    <div class="rounded-3xl border border-[#dce2d9] bg-white p-8">
+
+                        <h3 class="text-xl font-bold">Savings goal</h3>
+
+                        <p class="mt-2 text-[#60756b]">
+                            Set a target and see how your potential savings compare.
+                        </p>
+
+                        <label for="goalAmount" class="mt-8 block text-sm font-bold">
+                            Goal amount
+                        </label>
+
+                        <input id="goalAmount" type="number" value="10000" min="1"
+                            class="mt-2 w-full rounded-xl border border-[#dce2d9] bg-[#f7f8f3] px-4 py-4 outline-none focus:border-[#157653]">
+
+                        <strong id="goalSaved" class="mt-6 block text-5xl font-black text-[#157653]">
+                            ₹0
+                        </strong>
+
+                        <div class="mt-8 flex justify-between text-sm">
+                            <span>Progress</span>
+                            <span id="goalPercent">0%</span>
+                        </div>
+
+                        <div class="mt-2 h-3 rounded-full bg-[#e9eee7]">
+                            <div id="goalBar" class="h-full w-0 rounded-full bg-gradient-to-r from-[#157653] to-[#6bd5ad]"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="rounded-3xl border border-[#dce2d9] bg-white p-8">
+
+                        <h3 class="text-xl font-bold">SpendSense insights</h3>
+
+                        <div id="insights" class="mt-6 space-y-3"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact" class="bg-white">
+            <div class="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2">
+
+                <div>
+                    <p class="text-sm font-bold tracking-[2px] text-[#157653]">CONTACT</p>
+                    <h2 class="mt-5 text-5xl font-black">Have an idea or feedback?</h2>
+                    <p class="mt-5 max-w-xl text-lg leading-8 text-[#60756b]">
+                        We'd love to hear how SpendSense could become more useful for you.
+                    </p>
+                </div>
+
+                <div class="rounded-3xl border border-[#dce2d9] bg-[#f7f8f3] p-8">
+                    <form id="contactForm" class="space-y-5">
+
+                        <input id="contactName" type="text" placeholder="Your name" required
+                            class="w-full rounded-xl border border-[#dce2d9] bg-white px-4 py-4 outline-none focus:border-[#157653]">
+
+                        <input id="contactEmail" type="email" placeholder="you@example.com" required
+                            class="w-full rounded-xl border border-[#dce2d9] bg-white px-4 py-4 outline-none focus:border-[#157653]">
+
+                        <textarea id="contactMessage" rows="5" placeholder="Write your message..." required
+                            class="w-full rounded-xl border border-[#dce2d9] bg-white px-4 py-4 outline-none focus:border-[#157653]"></textarea>
+
+                        <button class="w-full rounded-xl bg-[#157653] px-5 py-4 font-bold text-white">
+                            Send message →
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="border-t border-[#dce2d9] bg-[#f7f8f3]">
+        <div class="mx-auto flex max-w-7xl justify-between px-6 py-8 text-sm text-[#60756b]">
+            <span>© 2026 SpendSense</span>
+            <a href="#home" class="font-bold text-[#157653]">Back to top ↑</a>
+        </div>
+    </footer>
+
+
+    <script src="Js/person1.js"></script>
+    <script src="Js/person2.js"></script>
+    <script src="Js/person3.js"></script>
 
 </body>
 </html>
