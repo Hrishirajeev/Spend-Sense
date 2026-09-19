@@ -24,9 +24,7 @@ links.forEach(function (link) {
     });
 });
 
-// =================================
 // HERO ELEMENTS
-// =================================
 
 var heroTitle = document.getElementById("heroTitle");
 var heroText = document.getElementById("heroText");
@@ -97,6 +95,55 @@ heroSecondaryBtn.onmouseout = function() {
     }
 }
 
+// FOOTER ELEMENTS
+
+var footer = document.getElementById("footer");
+var footerBottom = document.getElementById("footerBottom");
+var footerBadge = document.getElementById("footerBadge");
+var footerMuted = document.querySelectorAll(".footer-muted");
+var footerInk = document.querySelectorAll(".footer-ink");
+
+
+function setFooterTheme(theme) {
+
+    if (theme === "dark") {
+
+        footer.style.setProperty("background-color", "#0d1916", "important");
+        footer.style.setProperty("border-top-color", "#263832", "important");
+
+        footerBottom.style.setProperty("border-top-color", "#263832", "important");
+
+        footerBadge.style.setProperty("background-color", "#163229", "important");
+        footerBadge.style.setProperty("color", "#52bea0", "important");
+
+        footerMuted.forEach(function (el) {
+            el.style.setProperty("color", "#91a59d", "important");
+        });
+
+        footerInk.forEach(function (el) {
+            el.style.setProperty("color", "#edf5f1", "important");
+        });
+
+    } else {
+
+        footer.style.setProperty("background-color", "#f5f7f5", "important");
+        footer.style.setProperty("border-top-color", "#dce5df", "important");
+
+        footerBottom.style.setProperty("border-top-color", "#dce5df", "important");
+
+        footerBadge.style.setProperty("background-color", "#dceae4", "important");
+        footerBadge.style.setProperty("color", "#1f6f5c", "important");
+
+        footerMuted.forEach(function (el) {
+            el.style.setProperty("color", "#5b6b65", "important");
+        });
+
+        footerInk.forEach(function (el) {
+            el.style.setProperty("color", "#14241f", "important");
+        });
+    }
+}
+
 
 function setTheme(theme) {
 
@@ -154,6 +201,7 @@ function setTheme(theme) {
 
 
         setHeroTheme("dark");
+        setFooterTheme("dark");
 
     } else {
 
@@ -209,6 +257,7 @@ function setTheme(theme) {
 
 
         setHeroTheme("light");
+        setFooterTheme("light");
     }
 
     localStorage.setItem("spendsense_theme", theme);
