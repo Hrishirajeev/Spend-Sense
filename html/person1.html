@@ -1,10 +1,381 @@
-<!DOCTYPE html>
-<html>
+<<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Person 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SpendSense</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="./src/output.css">
 </head>
 
-<body>
+<body
+    id="body"
+    class="bg-[#0d1916] text-[#edf5f1]">
+
+    <!-- NAVBAR -->
+
+    <nav
+        id="navbar"
+        class="sticky top-0 z-50
+               bg-[#0d1916]
+               border-b border-[#263832]">
+
+        <div
+            class="max-w-[1120px] mx-auto
+                   px-4
+                   h-[68px]
+                   flex
+                   items-center
+                   justify-between">
+
+            <!-- LOGO -->
+
+            <a
+                id="logo"
+                href="#home"
+                class="flex
+                       items-center
+                       gap-3
+                       text-xl
+                       font-bold
+                       text-[#edf5f1]">
+
+                <i class="fa-solid fa-wallet text-[#52bea0]"></i>
+
+                <span>SpendSense</span>
+
+            </a>
+
+
+            <!-- MOBILE MENU BUTTON -->
+
+            <button
+                id="p1MenuBtn"
+                type="button"
+                aria-label="Open menu"
+                class="min-[901px]:hidden
+                       w-9
+                       h-9
+                       border
+                       border-[#263832]
+                       rounded-lg
+                       flex
+                       items-center
+                       justify-center
+                       hover:text-[#52bea0]
+                       hover:border-[#52bea0]
+                       transition">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <!-- NAVIGATION LINKS -->
+
+            <div
+                id="p1NavLinks"
+                class="min-[901px]:flex
+                       min-[901px]:items-center
+                       min-[901px]:gap-7
+                       max-[900px]:absolute
+                       max-[900px]:top-[68px]
+                       max-[900px]:left-0
+                       max-[900px]:right-0
+                       max-[900px]:flex
+                       max-[900px]:flex-col
+                       max-[900px]:items-start
+                       max-[900px]:gap-0
+                       max-[900px]:p-4
+                       max-[900px]:hidden
+                       max-[900px]:bg-[#0d1916]
+                       max-[900px]:border-b
+                       max-[900px]:border-[#263832]">
+
+                <!-- HOW IT WORKS -->
+
+                <a
+                    href="#how"
+                    class="nav-link
+                           py-3
+                           text-[#91a59d]
+                           hover:text-[#52bea0]
+                           transition
+                           max-[900px]:w-full
+                           max-[900px]:border-b
+                           max-[900px]:border-[#263832]">
+                    How it works
+                </a>
+
+
+                <!-- FEATURES -->
+
+                <a
+                    href="#features"
+                    class="nav-link
+                           py-3
+                           text-[#91a59d]
+                           hover:text-[#52bea0]
+                           transition
+                           max-[900px]:w-full
+                           max-[900px]:border-b
+                           max-[900px]:border-[#263832]">
+                    Features
+                </a>
+
+
+                <!-- TRY IT -->
+
+                <a
+                    href="#try"
+                    class="nav-link
+                           py-3
+                           text-[#91a59d]
+                           hover:text-[#52bea0]
+                           transition
+                           max-[900px]:w-full
+                           max-[900px]:border-b
+                           max-[900px]:border-[#263832]">
+                    Try it
+                </a>
+
+
+                <!-- WHY THIS -->
+
+                <a
+                    href="#why"
+                    class="nav-link
+                           py-3
+                           text-[#91a59d]
+                           hover:text-[#52bea0]
+                           transition
+                           max-[900px]:w-full
+                           max-[900px]:border-b
+                           max-[900px]:border-[#263832]">
+                    Why this
+                </a>
+
+
+                <!-- CONTACT -->
+
+                <a
+                    href="#contact"
+                    class="nav-link
+                           py-3
+                           text-[#91a59d]
+                           hover:text-[#52bea0]
+                           transition
+                           max-[900px]:w-full
+                           max-[900px]:border-b
+                           max-[900px]:border-[#263832]">
+                    Contact
+                </a>
+
+
+                <!-- THEME BUTTON -->
+
+                <button
+                    id="p1ThemeBtn"
+                    type="button"
+                    aria-label="Toggle light and dark mode"
+                    class="w-9
+                           h-9
+                           mt-2
+                           min-[901px]:mt-0
+                           border
+                           border-[#263832]
+                           rounded-lg
+                           text-[#edf5f1]
+                           flex
+                           items-center
+                           justify-center
+                           hover:text-[#52bea0]
+                           hover:border-[#52bea0]
+                           transition">
+
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section
+        id="home"
+        class="py-[72px] pb-16">
+
+        <div
+            class="max-w-[1120px]
+                   mx-auto
+                   px-6
+                   grid
+                   min-[881px]:grid-cols-[1.15fr_0.85fr]
+                   max-[880px]:grid-cols-1
+                   gap-12
+                   items-center">
+
+            <!-- LEFT SIDE -->
+
+            <div>
+
+                <h1
+                    class="text-[clamp(2rem,4.2vw,3rem)]
+                           leading-[1.12]
+                           font-medium
+                           mb-5">
+
+                    See exactly where your money quietly leaks every month.
+
+                </h1>
+
+
+                <p
+                    class="text-[#91a59d]
+                           text-[17px]
+                           max-w-[46ch]
+                           mb-8">
+
+                    Add what you pay for, mark how often you actually use it,
+                    and watch the number that matters — money wasted — update instantly.
+
+                </p>
+
+
+                <!-- HERO BUTTONS -->
+
+                <div class="flex gap-4 flex-wrap">
+
+                    <a
+                        href="#try"
+                        class="inline-block
+                               bg-[#1f6f5c]
+                               text-white
+                               px-5
+                               py-3
+                               rounded-lg
+                               text-[15px]
+                               font-semibold
+                               hover:opacity-90
+                               transition">
+
+                        Try it now
+
+                    </a>
+
+
+                    <a
+                        href="#how"
+                        class="inline-block
+                               border
+                               border-[#263832]
+                               text-[#edf5f1]
+                               px-5
+                               py-3
+                               rounded-lg
+                               text-[15px]
+                               font-semibold
+                               hover:border-[#91a59d]
+                               transition">
+
+                        See how it works
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE CARD -->
+
+            <div
+                class="bg-[#142420]
+                       border
+                       border-[#263832]
+                       rounded-2xl
+                       p-6">
+
+                <div class="flex items-center gap-5">
+
+                    <!-- SIMPLE SPENDING GRAPH -->
+
+                    <div
+                        class="w-[84px]
+                               h-[84px]
+                               rounded-full
+                               shrink-0
+                               border
+                               border-black
+                               bg-[conic-gradient(#ea580c_0deg_130deg,#52d6c4_130deg_360deg)]
+                               relative">
+
+                        <div
+                            class="absolute
+                                   inset-[11px]
+                                   rounded-full
+                                   bg-[#142420]
+                                   border
+                                   border-black">
+                        </div>
+
+                    </div>
+
+
+                    <!-- SPENDING AMOUNT -->
+
+                    <div>
+
+                        <p class="text-[#91a59d] text-sm mb-1">
+                            This month
+                        </p>
+
+                        <p class="text-[#c2542c] text-[30px] font-medium">
+                            ₹1,619
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    class="text-[#91a59d]
+                           text-sm
+                           mt-4
+                           pt-4
+                           border-t
+                           border-[#263832]">
+
+                    Leaking on a gym membership and a music plan,
+                    both barely opened this month.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PERSON 1 JAVASCRIPT -->
+
+    <script src="../Js/person1.js"></script>
 
 </body>
+
 </html>
